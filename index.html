@@ -15,7 +15,19 @@
     <script src="https://unpkg.com/vue@2.6.14/dist/vue.js"></script>
     <script src="https://unpkg.com/crypto-js@4.1.1/crypto-js.js"></script>
 </head>
-
+    <script>
+    (function() {
+        const width = window.innerWidth;
+        if (width<=375) {
+            document.querySelector('html').style.fontSize = '20px'
+        } else if (width>=525) {
+            document.querySelector('html').style.fontSize = '28px'
+        } else {
+            let s = (width - 375) * 0.0533 + 20;
+            document.querySelector('html').style.fontSize = s+'px'
+        }
+    })()
+    </script>
 <body>
     <div class="__page_loading" id="__page_loading" >
         <div id="__page_loading__img_wrap">
