@@ -1,0 +1,45 @@
+body {
+    margin: 0;
+}
+.modal {
+    width: 17.75rem;
+    height: 25rem;
+    margin: 1rem 0.5rem;
+    box-shadow: 0 0 7px 1px #ccc;
+    padding: 0.5rem;
+    box-sizing: border-box;
+}
+.form-item {
+    display: flex;
+}
+.form-label {
+    width: 4.2rem;
+    font-size: .8rem;
+}
+.form-content {
+    flex: 1;
+    position: relative;
+}
+.tag-list {
+    width:  100%;
+    display: flex;
+    justify-content: space-between;
+   
+    flex-wrap: wrap;
+}
+.tag {
+    font-size: .5rem;
+    line-height: 1;
+    width: 4rem;
+    border: 1px solid #ccc;
+    text-align: center;
+    box-sizing: border-box;
+    padding: .2rem .1rem;
+    border-radius: .5rem;
+    margin-bottom: .5rem;
+}
+.tag.active {
+    color: #fff;
+    background-color: #e96a6a;
+    border-color: #e96a6a;
+}
