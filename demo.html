@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="https://cdn.web-global.fds.api.mi-img.com/mcfe--mi-account/static/favicon_new.ico" />
+    <title>选择详情</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="google" content="notranslate" />
+    <link rel="stylesheet" href="./demo.css">
+    <script src="https://unpkg.com/jquery@3.6.0/dist/jquery.js"></script>
+</head>
+
+<body>
+    <div class="modal">
+        <div class="form">
+            <div class="form-item">
+                <div class="form-label">选择规格：</div>
+                <div class="form-content">
+                    <div class="tag-list">
+                        <span class="tag">1v1初级赛挑战</span>
+                        <span class="tag">1v1初级赛挑战</span>
+                        <span class="tag">1v1初级赛挑战</span>
+                        <span class="tag">1v1初级赛挑战</span>
+                        <span class="tag">1v1初级赛挑战</span>
+                        <span class="tag">1v1初级赛挑战</span>
+                        <span class="tag">1v1初级赛挑战</span>
+                        <span class="tag">1v1初级赛挑战</span>
+                        <span class="tag">1v1初级赛挑战</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="./static/index.js"></script>
+<script>
+    const setSize = function () {
+        const width = window.innerWidth;
+        if (width <= 375) {
+            document.querySelector('html').style.fontSize = '20px'
+        } else if (width >= 525) {
+            document.querySelector('html').style.fontSize = '28px'
+        } else {
+            let s = (width - 375) * 0.0533 + 20;
+            document.querySelector('html').style.fontSize = s + 'px'
+        }
+    };
+    window.onresize = function () {
+        setSize()
+    };
+    setSize();
+    $(function() {
+        $('.tag').click(function() {
+            $(this).addClass('active');
+            $(this).siblings().removeClass('active');
+        })
+    })
+</script>
+
+</html>
