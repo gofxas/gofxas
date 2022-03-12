@@ -37,9 +37,15 @@ body {
     padding: .2rem .1rem;
     border-radius: .5rem;
     margin-bottom: .5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .tag.active {
     color: #fff;
     background-color: #e96a6a;
     border-color: #e96a6a;
+}
+.tag i {
+    font-style: normal;
 }
